@@ -18,12 +18,12 @@ class RadioTest {
     }
 
     @Test
-        //Тест увеличение громкости за пределы максимума
+        //Тест увеличение громкости за пределы максимума **
     void increaseVolumeMax() {
         Radio rad = new Radio();
-        rad.setCurrentRadioVolume(10);
+        rad.setCurrentRadioVolume(100);
         rad.increaseVolume();
-        int expectedRadioVolumeMax = 10;
+        int expectedRadioVolumeMax = 100;
         int actualRadioVolumeMax = rad.getCurrentRadioVolume();
 
         assertEquals(expectedRadioVolumeMax, actualRadioVolumeMax);
@@ -77,6 +77,18 @@ class RadioTest {
     }
 
     @Test
+        //Тест увеличение станции за пределы максимума, с указанием количества станций*
+    void increaseStationMaxAmountSt() {
+        Radio rad = new Radio(15);
+        rad.setCurrentRadioStation(14);
+        rad.next();
+        int expectedRadioStationMaxAS = 0;
+        int actualRadioStationMaxAS = rad.getCurrentRadioStation();
+
+        assertEquals(expectedRadioStationMaxAS, actualRadioStationMaxAS);
+    }
+
+    @Test
         //Тест уменьшение станции
     void reduceStation() {
         Radio rad = new Radio();
@@ -101,6 +113,18 @@ class RadioTest {
     }
 
     @Test
+        //Тест уменьшение станции за пределы минимума, с указанием количества станций*
+    void reduceStationMinAmountSt() {
+        Radio rad = new Radio(30);
+        rad.setCurrentRadioStation(0);
+        rad.prev();
+        int expectedRadioStationMinAmSt = 29;
+        int actualRadioStationMinAmSt = rad.getCurrentRadioStation();
+
+        assertEquals(expectedRadioStationMinAmSt, actualRadioStationMinAmSt);
+    }
+
+    @Test
         //Тест выставление номера станции
     void setRadioStationS() {
         Radio rad = new Radio();
@@ -109,6 +133,17 @@ class RadioTest {
         int actualRadioStationS = rad.getCurrentRadioStation();
 
         assertEquals(expectedRadioStationS, actualRadioStationS);
+    }
+
+    @Test
+        //Тест выставление номера станции, с указанием количества станций*
+    void setRadioStationSAmountS() {
+        Radio rad = new Radio(20);
+        rad.setCurrentRadioStation(15);
+        int expectedRadioStationSAmSt = 15;
+        int actualRadioStationSAmSt = rad.getCurrentRadioStation();
+
+        assertEquals(expectedRadioStationSAmSt, actualRadioStationSAmSt);
     }
 
     @Test
@@ -123,6 +158,17 @@ class RadioTest {
     }
 
     @Test
+        //Тест выставление некорректного максимального номера станции, с указанием количества станций*
+    void setRadioStationWrongAmountSt() {
+        Radio rad = new Radio(27);
+        rad.setCurrentRadioStation(27);
+        int expectedRadioStationWAmSt = 0;
+        int actualRadioStationWAmSt = rad.getCurrentRadioStation();
+
+        assertEquals(expectedRadioStationWAmSt, actualRadioStationWAmSt);
+    }
+
+    @Test
         //Тест выставление некорректного минимального номера станции
     void setRadioStationWrongMin() {
         Radio rad = new Radio();
@@ -134,10 +180,10 @@ class RadioTest {
     }
 
     @Test
-        //Тест выставление некорректного максимального уровня громкости
+        //Тест выставление некорректного максимального уровня громкости **
     void setRadioVolumeWrongMax() {
         Radio rad = new Radio();
-        rad.setCurrentRadioVolume(15);
+        rad.setCurrentRadioVolume(150);
         int expectedRadioVolumeWMax = 0;
         int actualRadioVolumeWMax = rad.getCurrentRadioVolume();
 

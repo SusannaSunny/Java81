@@ -4,6 +4,18 @@ public class Radio {
 
     private int currentRadioStation;
     private int currentRadioVolume;
+    private int amountRadioStation = 10;
+    private int radioStationMax = amountRadioStation - 1;
+    private int radioStationMin = 0;
+    private int radioVolumeMin = 0;
+    private int radioVolumeMax = 100;
+
+    public Radio(int amountRadioStation) {
+        this.radioStationMax = amountRadioStation - 1;
+    }
+
+    public Radio() {
+    }
 
     public int getCurrentRadioStation() {
         return currentRadioStation;
@@ -15,10 +27,10 @@ public class Radio {
 
     // Громкость (Уровни)
     public void setCurrentRadioVolume(int currentRadioVolume) {
-        if (currentRadioVolume < 0) {
+        if (currentRadioVolume < radioVolumeMin) {
             return;
         }
-        if (currentRadioVolume > 10) {
+        if (currentRadioVolume > radioVolumeMax) {
             return;
         }
         this.currentRadioVolume = currentRadioVolume;
@@ -26,10 +38,10 @@ public class Radio {
 
     //Радиостанции (Уровни)
     public void setCurrentRadioStation(int currentRadioStation) {
-        if (currentRadioStation < 0) {
+        if (currentRadioStation < radioStationMin) {
             return;
         }
-        if (currentRadioStation > 9) {
+        if (currentRadioStation > radioStationMax) {
             return;
         }
         this.currentRadioStation = currentRadioStation;
@@ -37,31 +49,31 @@ public class Radio {
 
     //Громкость (границы)
     public void increaseVolume() {
-        if (currentRadioVolume < 10) {
+        if (currentRadioVolume < radioVolumeMax) {
             currentRadioVolume = currentRadioVolume + 1;
         }
     }
 
     public void reduceVolume() {
-        if (currentRadioVolume > 0) {
+        if (currentRadioVolume > radioVolumeMin) {
             currentRadioVolume = currentRadioVolume - 1;
         }
     }
 
     //Радиостанции (границы)
     public void next() {
-        if (currentRadioStation < 9) {
+        if (currentRadioStation < radioStationMax) {
             currentRadioStation = currentRadioStation + 1;
         } else {
-            currentRadioStation = 0;
+            currentRadioStation = radioStationMin;
         }
     }
 
     public void prev() {
-        if (currentRadioStation > 0) {
+        if (currentRadioStation > radioStationMin) {
             currentRadioStation = currentRadioStation - 1;
         } else {
-            currentRadioStation = 9;
+            currentRadioStation = radioStationMax;
         }
     }
 
